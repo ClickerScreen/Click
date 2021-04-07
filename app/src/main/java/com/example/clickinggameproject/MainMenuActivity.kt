@@ -3,16 +3,12 @@ package com.example.clickinggameproject
 import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.os.Handler
-import android.os.HandlerThread
-import android.os.Looper
 import android.view.MotionEvent
 import android.view.View
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import kotlin.math.exp
 
 class MainMenuActivity : AppCompatActivity() {
 
@@ -58,7 +54,7 @@ class MainMenuActivity : AppCompatActivity() {
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, MainGameActivity::class.java)
         startActivity(intent)
         return super.dispatchTouchEvent(ev)
     }
