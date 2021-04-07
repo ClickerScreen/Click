@@ -22,14 +22,14 @@ class MainGameActivity : AppCompatActivity() {
         var soundButton = findViewById<Button>(R.id.buttonSound)
         var randX = 0
         var randY = 0
+        
         var gameScore = findViewById<TextView>(R.id.textViewGameScore)
         var score = 0
         gameScore.setText("Score = " + score)
 
         // change button position on button click
         soundButton.setOnClickListener{
-            // remove the button from screen
-            soundButton.visibility = View.INVISIBLE
+            // add to the score visualizer on the screen
             score += 1
             gameScore.setText("Score = " + score)
 
@@ -37,12 +37,9 @@ class MainGameActivity : AppCompatActivity() {
             randX = Random.nextInt(30, width - 250)
             randY = Random.nextInt(90, height - 144)
 
-            var choice = Random.nextFloat()
+            // change the position of the button
             soundButton.x = randX.toFloat()
             soundButton.y = randY.toFloat()
-
-            // show button
-            soundButton.visibility = View.VISIBLE
         }
 
     }
