@@ -32,5 +32,4 @@
         android:textAllCaps="true"
         android:text="How Fast Can You Click!" />
 
-
 </RelativeLayout>

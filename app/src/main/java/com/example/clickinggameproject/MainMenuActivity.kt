@@ -7,10 +7,12 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
-class MainMenuActivity : AppCompatActivity() {
+class MainMenuActivity : AppCompatActivity()
+{
 
     protected lateinit var player: MediaPlayer
     protected var position:Int = 0
