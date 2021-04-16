@@ -23,6 +23,7 @@ class MainGameActivity : AppCompatActivity() {
         windowManager.defaultDisplay.getMetrics(displaymetrics)
         val width = displaymetrics.widthPixels // 1080
         val height = displaymetrics.heightPixels // 1794
+        var score = 0
 
         var soundButton = findViewById<Button>(R.id.buttonSound)
         var randX = 0
@@ -36,7 +37,9 @@ class MainGameActivity : AppCompatActivity() {
                 countDown.text = "Finished"
                 val handler = Handler(Looper.myLooper()!!)
                 handler.postDelayed({
-                    val intent = Intent(this@MainGameActivity, MainMenuActivity::class.java)
+                    val intent = Intent(this@MainGameActivity, LeaderBoardActivity::class.java)
+                    //pass the score also to the leaderboards activity addition by Jesse
+                    intent.putExtra("currentScore", score)
                     startActivity(intent)
                 }, 1000)
             }
@@ -49,7 +52,6 @@ class MainGameActivity : AppCompatActivity() {
         }.start()
         
         var gameScore = findViewById<TextView>(R.id.textViewGameScore)
-        var score = 0
         gameScore.setText("Score = " + score)
 
         // change button position on button click
@@ -67,10 +69,12 @@ class MainGameActivity : AppCompatActivity() {
             soundButton.y = randY.toFloat()
         }
 
-        val boardButton = findViewById<Button>(R.id.leaderBoard)
-        boardButton.setOnClickListener() {
-            val intent = Intent(this, LeaderBoardActivity::class.java)
-            startActivity(intent)
-        }
+        //commenting out for now since leaderboard activity can send back to main menu now
+        //also set the button to invisible it can be removed when we are happy with how it functions
+        //val boardButton = findViewById<Button>(R.id.leaderBoard)
+        //boardButton.setOnClickListener() {
+            //val intent = Intent(this, LeaderBoardActivity::class.java)
+            //startActivity(intent)
+        //}
     }
 }
