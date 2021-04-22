@@ -6,10 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".MainGameActivity">
 
-    <Button
+    <ImageButton
         android:id="@+id/buttonSound"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="93dp"
+        android:layout_height="87dp"
+        android:background="@color/white"
+        android:src="@drawable/coin"
         android:text="Sound"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

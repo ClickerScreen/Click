@@ -8,6 +8,7 @@ import android.os.Looper
 import android.util.DisplayMetrics
 import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import kotlin.random.Random
@@ -25,7 +26,7 @@ class MainGameActivity : AppCompatActivity() {
         val height = displaymetrics.heightPixels // 1794
         var score = 0
 
-        var soundButton = findViewById<Button>(R.id.buttonSound)
+        var soundButton = findViewById<ImageButton>(R.id.buttonSound)
         var randX = 0
         var randY = 0
 
