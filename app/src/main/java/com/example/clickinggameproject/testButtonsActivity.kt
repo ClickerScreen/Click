@@ -15,11 +15,11 @@ import kotlin.concurrent.timerTask
 import kotlin.random.Random
 
 class testButtonsActivity : AppCompatActivity() {
-    var numOfBtns: Int = 0
-    var randX = 0
-    var randY = 0
-    val numberOfButtonsToCreate = 3
-    val MAX_TARDINESS : Float = 3000f
+    private var numOfBtns: Int = 0
+    private var randX = 0
+    private var randY = 0
+    private val numberOfButtonsToCreate = 3
+    private val timer: Timer = Timer()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,25 +30,21 @@ class testButtonsActivity : AppCompatActivity() {
         val width = displaymetrics.widthPixels // 1080
         val height = displaymetrics.heightPixels // 1794
 
-        randX = Random.nextInt(30, width - 250)
-        randY = Random.nextInt(90, height - 144)
-        CreateButtonTimer()
+        CreateButtonTimer(width, height)
     }
 
-    fun CreateButtonTimer(){
-        val timer: Timer = Timer()
+    fun CreateButtonTimer(screenX: Int, screenY: Int) {
         var timerTask = timerTask {
-            run(){
+            run() {
+                randX = Random.nextInt(30, screenX - 250)
+                randY = Random.nextInt(90, screenY - 144)
                 CreateButtons(randX, randY)
             }
         }
-        timer.schedule(timerTask, 1000)
-
-        if(numOfBtns == numberOfButtonsToCreate)
-            timer.cancel()
+        timer.schedule(timerTask, 250, 1000)
     }
 
-    fun CreateButtons(posx: Int, posy: Int){
+    fun CreateButtons(posx: Int, posy: Int) {
         this.runOnUiThread() {
             val params = LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -69,7 +65,15 @@ class testButtonsActivity : AppCompatActivity() {
             {
                 Toast.makeText(this, "Button clicked index = " + btn.id, Toast.LENGTH_SHORT).show()
             }
+
+            if (numOfBtns == numberOfButtonsToCreate) {
+                timer.cancel()
+            }
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        timer.cancel()
+    }
 }
