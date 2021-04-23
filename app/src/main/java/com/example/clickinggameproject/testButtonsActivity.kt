@@ -11,6 +11,7 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import java.util.*
+import kotlin.concurrent.timerTask
 import kotlin.random.Random
 
 class testButtonsActivity : AppCompatActivity() {
@@ -18,6 +19,7 @@ class testButtonsActivity : AppCompatActivity() {
     var randX = 0
     var randY = 0
     val numberOfButtonsToCreate = 3
+    val MAX_TARDINESS : Float = 3000f
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,32 +30,46 @@ class testButtonsActivity : AppCompatActivity() {
         val width = displaymetrics.widthPixels // 1080
         val height = displaymetrics.heightPixels // 1794
 
-        for(i in 0..numberOfButtonsToCreate) {
-            randX = Random.nextInt(30, width - 250)
-            randY = Random.nextInt(90, height - 144)
-            CreateButtons(randX, randY)
+        randX = Random.nextInt(30, width - 250)
+        randY = Random.nextInt(90, height - 144)
+        CreateButtonTimer()
+    }
+
+    fun CreateButtonTimer(){
+        val timer: Timer = Timer()
+        var timerTask = timerTask {
+            run(){
+                CreateButtons(randX, randY)
+            }
         }
+        timer.schedule(timerTask, 1000)
+
+        if(numOfBtns == numberOfButtonsToCreate)
+            timer.cancel()
     }
 
     fun CreateButtons(posx: Int, posy: Int){
-        val params = LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.WRAP_CONTENT,
-            LinearLayout.LayoutParams.WRAP_CONTENT
-        )
-        val btn = Button(this)
-        btn.id = numOfBtns
-        numOfBtns++
-        btn.setBackgroundResource(R.drawable.coin)
+        this.runOnUiThread() {
+            val params = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+            val btn = Button(this)
+            btn.id = numOfBtns
+            numOfBtns++
+            btn.setBackgroundResource(R.drawable.coin)
 
-        btn.x = posx.toFloat()
-        btn.y = posy.toFloat()
+            btn.x = posx.toFloat()
+            btn.y = posy.toFloat()
 
-        addContentView(btn, params)
+            addContentView(btn, params)
 
-        val _createdButton = findViewById<Button>(btn.id)
-        _createdButton.setOnClickListener()
-        {
-            Toast.makeText(this, "Button clicked index = " + btn.id, Toast.LENGTH_SHORT).show()
+            val _createdButton = findViewById<Button>(btn.id)
+            _createdButton.setOnClickListener()
+            {
+                Toast.makeText(this, "Button clicked index = " + btn.id, Toast.LENGTH_SHORT).show()
+            }
         }
     }
+
 }
