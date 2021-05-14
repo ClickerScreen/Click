@@ -4,19 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_list"
+    android:id="@+id/layout"
     tools:context=".MainGameActivity">
-
-    <ImageButton
-        android:id="@+id/buttonSound"
-        android:layout_width="93dp"
-        android:layout_height="87dp"
-        android:background="@color/white"
-        android:src="@drawable/coin"
-        android:text="Sound"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textViewGameScore"
@@ -47,14 +37,11 @@
         android:id="@+id/leaderBoard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="224dp"
         android:backgroundTint="@color/teal_700"
         android:text="LEADERBOARD"
         android:visibility="invisible"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonSound"
-        tools:layout_editor_absoluteX="134dp"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="633dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
