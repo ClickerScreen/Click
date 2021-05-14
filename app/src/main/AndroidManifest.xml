@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ClickingGameProject">
         <activity android:name=".LeaderBoardActivity" />
-        <activity android:name=".testButtonsActivity">
+        <activity android:name=".MainMenuActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
