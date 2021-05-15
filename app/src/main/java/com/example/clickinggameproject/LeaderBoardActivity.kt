@@ -55,6 +55,13 @@ class LeaderBoardActivity : AppCompatActivity() {
         }
 
         fun readTextFromFileAndUpdateScreen() {
+            var _fileInputStream_: FileInputStream? = null
+            try {
+                _fileInputStream_ = openFileInput(filename)
+            }
+            catch (e: FileNotFoundException) {
+                setInitialLeaderboard()
+            }
             var fileInputStream: FileInputStream? = null
             fileInputStream = openFileInput(filename)
             var inputStreamReader: InputStreamReader = InputStreamReader(fileInputStream)
@@ -70,9 +77,9 @@ class LeaderBoardActivity : AppCompatActivity() {
             else
             {
                 var rank = 0
-                lbRank.setText("")
-                lbNames.setText("")
-                lbScore.setText("")
+                lbRank.text = ""
+                lbNames.text = ""
+                lbScore.text = ""
                 // text obtained from bufferedReader is not null read in the next line
                 while( { text = bufferedReader.readLine(); text } () != null) {
                     rank++
@@ -99,7 +106,7 @@ class LeaderBoardActivity : AppCompatActivity() {
                 topPlayers.add(Player(initials.toString(), fileScore!!.toInt())) //!! means assert non null
             }
 
-            //TODO: check for if player's score should be on the leaderboard ()
+            //check for if player's score should be on the leaderboard ()
             //if player's score should be on the leaderboards:
             for(i in topPlayers) {
                 println(i.score)
@@ -133,8 +140,8 @@ class LeaderBoardActivity : AppCompatActivity() {
             }
         }
 
-        submitButton.setOnClickListener() {
-            if(TextUtils.isEmpty(initialsText.getText().toString())) {
+        submitButton.setOnClickListener {
+            if(TextUtils.isEmpty(initialsText.text.toString())) {
                 Toast.makeText(applicationContext, "Enter your initials", Toast.LENGTH_SHORT).show()
             }
             else {
@@ -152,7 +159,7 @@ class LeaderBoardActivity : AppCompatActivity() {
         submitButton.visibility = Button.VISIBLE
         initialsText.visibility = EditText.VISIBLE
         // called first every time the activity starts to show the data in the textfile on the screen
-        readTextFromFileAndUpdateScreen() // comment this if we need to reset the txt file
         //setInitialLeaderboard() // un comment this when we need to reset the txt file
+        readTextFromFileAndUpdateScreen() // comment this if we need to reset the txt file
     }
 }
