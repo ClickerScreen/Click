@@ -101,8 +101,8 @@ class MainGameActivity : AppCompatActivity() {
     fun CreateButtonTimer(screenX: Int, screenY: Int, score: TextView, sound: MediaPlayer) {
         val timerTask = timerTask {
             run() {
-                randX = Random.nextInt(30, screenX - 250)
-                randY = Random.nextInt(90, screenY - 144)
+                randX = Random.nextInt(0, screenX - 250)
+                randY = Random.nextInt(0, screenY - 144)
                 CreateButtons(randX, randY, score, sound)
             }
         }
