@@ -8,6 +8,8 @@ import android.os.CountDownTimer
 import android.os.Handler
 import android.os.Looper
 import android.util.DisplayMetrics
+import android.view.Window
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -15,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import kotlinx.coroutines.*
+import java.lang.IllegalStateException
 import java.util.*
 import kotlin.concurrent.timerTask
 import kotlin.random.Random
@@ -32,6 +35,9 @@ class MainGameActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        requestWindowFeature(Window.FEATURE_NO_TITLE) // request the activity to have no title
+        this.window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN) // set the proper flags for the title
+        supportActionBar?.hide() // hide the title bar at the top
         setContentView(R.layout.activity_main_game)
 
         val constraintLayout = findViewById<ConstraintLayout>(R.id.layout)
@@ -58,7 +64,7 @@ class MainGameActivity : AppCompatActivity() {
                 handler.postDelayed({
                     val intent = Intent(this@MainGameActivity, LeaderBoardActivity::class.java)
                     //pass the score also to the leaderboards activity addition by Jesse
-                    intent.putExtra("currentScore", score)
+                    intent.putExtra("currentScore", points)
                     startActivity(intent)
                 }, 1000)
 
@@ -140,7 +146,12 @@ class MainGameActivity : AppCompatActivity() {
             _createdButton.setOnClickListener()
             {
                 job.cancel()
-                sound.start()
+                try {
+                    sound.start()
+                } catch (e:IllegalStateException) {
+                e.printStackTrace()
+            }
+
 
                 if(job.isCancelled)
                     job = NotClicked(_createdButton)

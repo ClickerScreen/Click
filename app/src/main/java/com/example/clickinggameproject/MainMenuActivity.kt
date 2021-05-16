@@ -5,6 +5,8 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
+import android.view.Window
+import android.view.WindowManager
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.widget.Button
@@ -19,6 +21,9 @@ class MainMenuActivity : AppCompatActivity()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        requestWindowFeature(Window.FEATURE_NO_TITLE) // request the activity to have no title
+        this.window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN) // set the proper flags for the title
+        supportActionBar?.hide() // hide the title bar at the top
         setContentView(R.layout.activity_main_menu)
 
         val blinkingText:TextView = findViewById<TextView>(R.id.blink)

@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.Window
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -15,6 +17,9 @@ import java.io.*
 class LeaderBoardActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        requestWindowFeature(Window.FEATURE_NO_TITLE) // request the activity to have no title
+        this.window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN) // set the proper flags for the title
+        supportActionBar?.hide() // hide the title bar at the top
         setContentView(R.layout.activity_leader_board)
 
         var submitButton = findViewById<Button>(R.id.buttonSubmitScore)
